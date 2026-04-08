@@ -2,3 +2,16 @@ node_modules/
 .env
 build/
 dist/
+
+# Backend environment
+backend/.env
+backend/.env.*
+
+# Audit & report files
+*.md
+frontend/ENVIRONMENT_VARIABLES_AUDIT_REPORT.md
+frontend/PROCESS_ENV_MIGRATION_REPORT.md
+frontend/AUDIT_SUMMARY.md
+frontend/DEPLOYMENT_CHECKLIST.md
+frontend/PRODUCTION_READY_SUMMARY.md
+frontend/START_HERE_QUICK_GUIDE.md
