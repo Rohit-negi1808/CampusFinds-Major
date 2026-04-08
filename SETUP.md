@@ -29,12 +29,6 @@ The Vite dev server proxies all `/api` calls to the backend automatically.
 
 ---
 
-## Default Login
-- **Admin:** admin@campusfinds.com / admin123
-- **Student:** Register on the site
-
----
-
 ## Troubleshooting
 
 | Error | Fix |
