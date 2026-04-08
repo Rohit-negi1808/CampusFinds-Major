@@ -100,5 +100,9 @@ setInterval(runClaimAutoDelete, 60 * 60 * 1000);
 setInterval(runDataRetention,   60 * 60 * 1000);
 // ─────────────────────────────────────────────────────────────────────────────
 
+app.get("/", (req, res) => {
+  res.send("CampusFinds API is running 🚀");
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 CampusFinds API running on http://localhost:${PORT}`));
