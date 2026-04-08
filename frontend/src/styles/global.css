@@ -1,0 +1,62 @@
+/* ============================================
+   CAMPUSFINDS — GLOBAL DESIGN SYSTEM v4
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,.05);
+  --shadow: 0 4px 16px rgba(0,0,0,.08);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,.11);
+  --transition: all 0.22s ease;
+  --header-h: 65px;
+  --accent: #6366f1;
+  --accent2: #10b981;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+}
+
+/* Light theme (default) */
+[data-theme="light"], :root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface2: #f1f5f9;
+  --text: #1e293b;
+  --text-2: #475569;
+  --text-3: #94a3b8;
+  --border: #e2e8f0;
+  --hover: #f8fafc;
+  --input-bg: #ffffff;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --bg: #0b1120;
+  --surface: #131f35;
+  --surface2: #1a2844;
+  --text: #e2e8f0;
+  --text-2: #94a3b8;
+  --text-3: #475569;
+  --border: #1e3358;
+  --hover: #1a2844;
+  --input-bg: #131f35;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.6;
+  transition: background 0.3s, color 0.3s;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root { display: flex; flex-direction: column; min-height: 100vh; }

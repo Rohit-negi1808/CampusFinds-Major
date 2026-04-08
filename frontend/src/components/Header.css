@@ -1,0 +1,342 @@
+/* --- Global Variables & Font Setup --- */
+:root {
+    --header-height: 80px; 
+    --accent-color: #20c997; /* Bright green/teal from your banner */
+    --logo-hover-color: #3498db; /* Specific blue for logo hover */
+    --base-color: #060010; /* Dark text/icon color */
+    --link-color: #555;
+    --link-hover-color: var(--base-color);
+    font-family: 'Poppins', sans-serif; /* Recommended clean, modern font */
+}
+
+/* --- 1. FIXED HEADER LAYOUT & NON-OVERLAP FIX --- */
+
+/* This element occupies space in the document flow, preventing overlap */
+.header-spacer {
+    height: var(--header-height); 
+    width: 100%;
+}
+
+/* This is the fixed navigation wrapper */
+.app-navbar-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-height);
+    z-index: 1000;
+    background: #ffffff; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); 
+    display: flex;
+    align-items: center;
+}
+
+/* Container for logo, nav, and avatar */
+.app-header-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* --- 2. Branding & Navigation --- */
+
+.app-branding {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--base-color);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+    transition: color 0.3s ease;
+}
+
+/* LOGO HOVER COLOR CHANGE */
+.app-branding:hover {
+    color: var(--logo-hover-color); 
+}
+
+.app-nav-wrapper {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: flex-end;
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    gap: 30px;
+    margin-right: 40px; 
+}
+
+.nav-link-item {
+    position: relative;
+    text-decoration: none;
+    font-size: 1.05rem; /* Increased size for readability */
+    font-weight: 500;
+    color: var(--link-color);
+    padding: 5px 0;
+    transition: color 0.3s ease;
+    display: inline-block;
+}
+
+.nav-link-item:hover {
+    color: var(--link-hover-color);
+}
+
+/* Cool Underline Hover Effect */
+.link-underline {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--accent-color);
+    transform: scaleX(0); 
+    transform-origin: bottom center;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+    border-radius: 2px;
+}
+
+.nav-link-item:hover .link-underline,
+.nav-link-item.active .link-underline {
+    transform: scaleX(1); 
+}
+
+.nav-link-item.active {
+    color: var(--base-color); 
+    font-weight: 600;
+}
+
+/* --- 3. User Avatar & Card --- */
+
+.user-profile-section {
+    position: relative;
+    z-index: 1010;
+}
+
+.user-avatar-button {
+    background: transparent;
+    border: 2px solid var(--accent-color);
+    padding: 0;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.2s ease-out;
+}
+
+.user-avatar-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 8px rgba(32, 201, 151, 0.5); 
+}
+
+.user-avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* User Card Dropdown Popover */
+.user-card-popover {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    width: 200px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    border-top: 3px solid var(--accent-color); 
+    animation: popIn 0.3s ease-out;
+}
+
+@keyframes popIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.user-name-text {
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: var(--base-color);
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+.logout-button {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    border: 2px solid var(--accent-color);
+    background-color: transparent;
+    color: var(--accent-color);
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: var(--accent-color);
+    color: #ffffff;
+}
+
+
+/* --- 4. Mobile Responsiveness (Screen size < 992px) --- */
+
+.navbar-toggler {
+    display: none; 
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    position: relative;
+    z-index: 101;
+}
+
+.toggler-line {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: var(--base-color);
+    border-radius: 1px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.toggler-line:first-child { transform-origin: top left; }
+.toggler-line:last-child { transform-origin: bottom left; margin-top: 6px; }
+
+/* Hamburger Menu Animation */
+.navbar-toggler.is-active .toggler-line:first-child {
+    transform: rotate(45deg) translate(2px, -1px);
+}
+.navbar-toggler.is-active .toggler-line:last-child {
+    transform: rotate(-45deg) translate(0px, 1px);
+}
+
+
+@media (max-width: 992px) {
+    /* Hide Nav and Avatar wrapper initially on mobile */
+    .app-nav-wrapper {
+        position: absolute;
+        top: var(--header-height);
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 20px 0;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        transform: translateY(-100%);
+        transition: transform 0.3s ease-out;
+        z-index: 99;
+    }
+
+    .app-nav-wrapper.open {
+        transform: translateY(0);
+    }
+
+    .navbar-toggler {
+        display: block; 
+    }
+    
+    .nav-list {
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 20px;
+        margin-right: 0;
+        padding: 0 20px;
+    }
+    
+    .nav-list li {
+        width: 100%;
+    }
+
+    .nav-link-item {
+        display: block;
+        text-align: center;
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+    }
+    .nav-list li:last-child .nav-link-item {
+        border-bottom: none;
+    }
+
+    /* Hide underline on mobile for simplicity */
+    .link-underline {
+        display: none;
+    }
+
+    /* User section within the opened mobile menu */
+    .user-profile-section {
+        position: static;
+        width: 100%;
+        padding: 0 20px;
+        text-align: center;
+    }
+
+    .user-avatar-button {
+        margin-bottom: 15px;
+    }
+
+    .user-card-popover {
+        position: static;
+        margin: 15px auto 0;
+        width: 180px;
+        box-shadow: none;
+        border: 1px solid #eee;
+    }
+}
+
+/* ── DARK MODE SUPPORT FOR HEADER ── */
+[data-theme="dark"] .app-navbar-fixed {
+    background: #1e293b;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .app-branding {
+    color: #e2e8f0;
+}
+
+[data-theme="dark"] .nav-link-item {
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .nav-link-item:hover,
+[data-theme="dark"] .nav-link-item.active {
+    color: #e2e8f0;
+}
+
+[data-theme="dark"] .user-card-popover {
+    background: #1e293b;
+    border-color: #334155;
+}
+
+[data-theme="dark"] .user-name-text {
+    color: #e2e8f0;
+}
+
+[data-theme="dark"] .toggler-line {
+    background: #e2e8f0;
+}
+
+@media (max-width: 992px) {
+    [data-theme="dark"] .app-nav-wrapper {
+        background-color: #1e293b;
+        border-top: 1px solid #334155;
+    }
+    [data-theme="dark"] .nav-link-item {
+        border-bottom-color: #334155;
+    }
+}
