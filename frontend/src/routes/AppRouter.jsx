@@ -26,7 +26,8 @@ export default function AppRouter() {
   const handleLogin = async () => {
     setError(null)
     try {
-      const endpoint = loginType === 'admin' ? '/api/admin/login' : '/api/users/login'
+      const baseUrl = process.env.REACT_APP_API_URL || ''
+      const endpoint = loginType === 'admin' ? `${baseUrl}/api/admin/login` : `${baseUrl}/api/users/login`
       const res = await fetch(endpoint, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ email, password }) })
       const data = await res.json()
       if (!res.ok) throw new Error(data.message || 'Invalid credentials')

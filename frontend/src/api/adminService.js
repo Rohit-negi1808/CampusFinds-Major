@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE = '/api';
+const BASE = `${process.env.REACT_APP_API_URL || ''}/api`;
 const ax = axios.create({ baseURL: BASE });
 ax.interceptors.request.use(c => {
   const t = localStorage.getItem('cf-token');

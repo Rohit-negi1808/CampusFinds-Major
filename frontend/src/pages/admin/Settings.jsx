@@ -70,9 +70,10 @@ const UPCOMING = [
   { icon: "🤖", title: "AI Matching",   desc: "Automatically suggest matching lost/found pairs using AI similarity", color: "#ef4444" },
 ];
 
+const baseUrl = process.env.REACT_APP_API_URL || '';
 const api = {
-  get: (key)        => fetch(`/api/settings/${key}`).then(r => r.json()),
-  put: (key, value) => fetch(`/api/settings/${key}`, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ value }) }),
+  get: (key)        => fetch(`${baseUrl}/api/settings/${key}`).then(r => r.json()),
+  put: (key, value) => fetch(`${baseUrl}/api/settings/${key}`, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ value }) }),
 };
 
 export default function Settings({ toast }) {

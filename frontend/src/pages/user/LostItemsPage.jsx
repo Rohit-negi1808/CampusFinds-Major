@@ -40,7 +40,8 @@ export default function LostItemsPage({ showPage }) {
     (async () => {
       try {
         setLoading(true);
-        const r = await fetch('/api/lost-items');
+        const baseUrl = process.env.REACT_APP_API_URL || '';
+        const r = await fetch(`${baseUrl}/api/lost-items`);
         const data = await r.json();
         setItems(data.map(i => ({ ...i, type:'lost' })));
       } catch(e){ console.error(e); }

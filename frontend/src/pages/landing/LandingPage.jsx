@@ -24,7 +24,8 @@ export default function LandingPage({ onGetStarted }) {
   useEffect(() => {
     (async () => {
       try {
-        const [sR, fbR] = await Promise.all([fetch('/api/analytics/stats'), fetch('/api/feedback/public')])
+        const baseUrl = process.env.REACT_APP_API_URL || '';
+        const [sR, fbR] = await Promise.all([fetch(`${baseUrl}/api/analytics/stats`), fetch(`${baseUrl}/api/feedback/public`)])
         if (sR.ok) { const s = await sR.json(); setLiveStats({ totalItems:s.totalItems||0, returned:s.returned||0, students:s.students||0 }) }
         if (fbR.ok) setStories((await fbR.json()).slice(0,3))
       } catch{}

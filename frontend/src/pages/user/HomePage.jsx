@@ -40,7 +40,8 @@ export default function HomePage({ showPage }) {
   useEffect(() => {
     (async () => {
       try {
-        const [itemsRes, storiesRes] = await Promise.all([fetch('/api/found-items'), fetch('/api/feedback/public')]);
+        const baseUrl = process.env.REACT_APP_API_URL || '';
+        const [itemsRes, storiesRes] = await Promise.all([fetch(`${baseUrl}/api/found-items`), fetch(`${baseUrl}/api/feedback/public`)]);
         const itemsData = await itemsRes.json();
         setItems(itemsData.sort((a,b)=>new Date(b.dateFound)-new Date(a.dateFound)).slice(0,3).map(i=>({...i,type:'found'})));
         if (storiesRes.ok) setStories((await storiesRes.json()).slice(0,6));
@@ -55,7 +56,8 @@ export default function HomePage({ showPage }) {
       return setClaimError('Please fill Name, Contact and Message.');
     setSubmitting(true);
     try {
-      const res = await fetch('/api/claims', { method:'POST', headers:{'Content-Type':'application/json'},
+      const baseUrl = process.env.REACT_APP_API_URL || '';
+      const res = await fetch(`${baseUrl}/api/claims`, { method:'POST', headers:{'Content-Type':'application/json'},
         body:JSON.stringify({ itemId:selectedItem._id, itemType:'found', claimantName:claimData.name, claimantEmail:claimData.email||'', contact:claimData.contact, message:claimData.message })
       });
       const json = await res.json();

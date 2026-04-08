@@ -59,12 +59,12 @@ export default function ContactPage({ currentUser, toast }) {
 
   const loadComplaints = async () => {
     setLoadingComplaints(true)
-    try { const r = await fetch(`/api/contact/by-email/${encodeURIComponent(currentUser.email)}`); setMyComplaints(await r.json()) }
+    try { const baseUrl = process.env.REACT_APP_API_URL || ''; const r = await fetch(`${baseUrl}/api/contact/by-email/${encodeURIComponent(currentUser.email)}`); setMyComplaints(await r.json()) }
     catch{} finally { setLoadingComplaints(false) }
   }
   const loadClaims = async () => {
     setLoadingClaims(true)
-    try { const r = await fetch(`/api/claims/by-email/${encodeURIComponent(currentUser.email)}`); if(r.ok) setMyClaims(await r.json()) }
+    try { const baseUrl = process.env.REACT_APP_API_URL || ''; const r = await fetch(`${baseUrl}/api/claims/by-email/${encodeURIComponent(currentUser.email)}`); if(r.ok) setMyClaims(await r.json()) }
     catch{} finally { setLoadingClaims(false) }
   }
 
@@ -72,7 +72,8 @@ export default function ContactPage({ currentUser, toast }) {
     if (!cForm.name||!cForm.email||!cForm.subject||!cForm.message) return toast?.error('Please fill all fields')
     setCSending(true)
     try {
-      const r = await fetch('/api/contact', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(cForm) })
+      const baseUrl = process.env.REACT_APP_API_URL || ''
+      const r = await fetch(`${baseUrl}/api/contact`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(cForm) })
       if (!r.ok) throw new Error()
       toast?.success('Complaint submitted! We will respond soon.')
       setCForm(p=>({ ...p, subject:'', message:'' }))
@@ -84,7 +85,8 @@ export default function ContactPage({ currentUser, toast }) {
     if (!fForm.name||!fForm.email||!fForm.rating||!fForm.message) return toast?.error('Please fill name, email, rating and message')
     setFSending(true)
     try {
-      const r = await fetch('/api/feedback', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(fForm) })
+      const baseUrl = process.env.REACT_APP_API_URL || ''
+      const r = await fetch(`${baseUrl}/api/feedback`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(fForm) })
       if (!r.ok) throw new Error()
       setFDone(true)
       toast?.success('Thank you for your feedback! 🎉')

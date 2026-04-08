@@ -85,9 +85,10 @@ const ReportItemPage = ({ showPage, currentUser, toast }) => {
         else { newItem.dateFound = formData.date; }
 
         try {
+            const baseUrl = process.env.REACT_APP_API_URL || '';
             const endpoint = reportType === "lost"
-                ? "/api/lost-items"
-                : "/api/found-items";
+                ? `${baseUrl}/api/lost-items`
+                : `${baseUrl}/api/found-items`;
 
             const response = await fetch(endpoint, {
                 method: "POST",

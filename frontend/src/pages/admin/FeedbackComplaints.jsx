@@ -30,7 +30,8 @@ export default function FeedbackComplaints({ toast }) {
     (async () => {
       setLoading(true)
       try {
-        const [cRes, fRes] = await Promise.all([fetch('/api/contact'), fetch('/api/feedback')])
+        const baseUrl = process.env.REACT_APP_API_URL || ''
+        const [cRes, fRes] = await Promise.all([fetch(`${baseUrl}/api/contact`), fetch(`${baseUrl}/api/feedback`)])
         if (cRes.ok) setComplaints(await cRes.json())
         if (fRes.ok) setFeedbacks(await fRes.json())
       } catch { toast?.error('Failed to load') }
@@ -51,7 +52,8 @@ export default function FeedbackComplaints({ toast }) {
   const resolveComplaint = async (id, adminReply) => {
     setSaving(true)
     try {
-      const r = await fetch(`/api/contact/${id}/resolve`, { method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ adminReply }) })
+      const baseUrl = process.env.REACT_APP_API_URL || ''
+      const r = await fetch(`${baseUrl}/api/contact/${id}/resolve`, { method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ adminReply }) })
       if (!r.ok) throw new Error()
       const updated = await r.json()
       setComplaints(p => p.map(c => c._id===id ? updated : c))
@@ -63,7 +65,8 @@ export default function FeedbackComplaints({ toast }) {
   const deleteFeedback = async (id) => {
     if (!confirm('Delete this feedback?')) return
     try {
-      await fetch(`/api/feedback/${id}`, { method:'DELETE' })
+      const baseUrl = process.env.REACT_APP_API_URL || ''
+      await fetch(`${baseUrl}/api/feedback/${id}`, { method:'DELETE' })
       setFeedbacks(p => p.filter(f => f._id !== id))
       toast?.success('Deleted')
     } catch { toast?.error('Delete failed') }
@@ -71,7 +74,8 @@ export default function FeedbackComplaints({ toast }) {
 
   const toggleFeedback = async (id) => {
     try {
-      const r = await fetch(`/api/feedback/${id}/toggle`, { method:'PATCH' })
+      const baseUrl = process.env.REACT_APP_API_URL || ''
+      const r = await fetch(`${baseUrl}/api/feedback/${id}/toggle`, { method:'PATCH' })
       if (!r.ok) throw new Error()
       const updated = await r.json()
       setFeedbacks(p => p.map(f => f._id===id ? updated : f))

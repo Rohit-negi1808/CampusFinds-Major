@@ -41,8 +41,9 @@ export default function FoundItemsManagement({ toast }) {
   const fetchItems = async () => {
     setLoading(true)
     try {
+      const baseUrl = process.env.REACT_APP_API_URL || ''
       const [itemsRes, claimsData] = await Promise.all([
-        fetch('/api/found-items').then(r => r.json()),
+        fetch(`${baseUrl}/api/found-items`).then(r => r.json()),
         getClaims().catch(() => [])
       ])
       setItems(itemsRes)
@@ -72,7 +73,8 @@ export default function FoundItemsManagement({ toast }) {
 
   const doDelete = async () => {
     try {
-      await fetch(`/api/found-items/${deleteTarget._id}`, { method: 'DELETE' })
+      const baseUrl = process.env.REACT_APP_API_URL || ''
+      await fetch(`${baseUrl}/api/found-items/${deleteTarget._id}`, { method: 'DELETE' })
       setItems(p => p.filter(i => i._id !== deleteTarget._id))
       toast?.success('Item deleted'); setDeleteTarget(null)
     } catch { toast?.error('Delete failed') }
@@ -80,7 +82,8 @@ export default function FoundItemsManagement({ toast }) {
 
   const doEdit = async () => {
     try {
-      const r = await fetch(`/api/found-items/${editItem._id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(editForm) })
+      const baseUrl = process.env.REACT_APP_API_URL || ''
+      const r = await fetch(`${baseUrl}/api/found-items/${editItem._id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(editForm) })
       const updated = await r.json()
       setItems(p => p.map(i => i._id === editItem._id ? updated : i))
       toast?.success('Item updated'); setEditItem(null)
