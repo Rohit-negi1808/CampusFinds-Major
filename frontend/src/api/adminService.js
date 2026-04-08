@@ -1,5 +1,8 @@
 import axios from 'axios';
 
+// Environment variable: VITE_API_URL from .env or Vercel environment
+// Falls back to '/api' for local development with Vite proxy
+// Set this in .env.local (dev) or Vercel Project Settings (production)
 const BASE = import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api` : '/api';
 const ax = axios.create({ baseURL: BASE });
 ax.interceptors.request.use(c => {
