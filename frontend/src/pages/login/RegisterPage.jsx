@@ -40,7 +40,7 @@ export default function RegisterPage({ showPage }) {
     if (Object.keys(errs).length > 0) return
     setLoading(true)
     try {
-      const baseUrl = process.env.REACT_APP_API_URL || ''
+      const baseUrl = import.meta.env.VITE_API_URL || ''
       const r = await fetch(`${baseUrl}/api/users/register`, {
         method:'POST', headers:{'Content-Type':'application/json'},
         body: JSON.stringify({ name:form.name, email:form.email, password:form.password, studentId:form.studentId })

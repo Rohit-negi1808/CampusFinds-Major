@@ -70,7 +70,7 @@ const UPCOMING = [
   { icon: "🤖", title: "AI Matching",   desc: "Automatically suggest matching lost/found pairs using AI similarity", color: "#ef4444" },
 ];
 
-const baseUrl = process.env.REACT_APP_API_URL || '';
+const baseUrl = import.meta.env.VITE_API_URL || '';
 const api = {
   get: (key)        => fetch(`${baseUrl}/api/settings/${key}`).then(r => r.json()),
   put: (key, value) => fetch(`${baseUrl}/api/settings/${key}`, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ value }) }),

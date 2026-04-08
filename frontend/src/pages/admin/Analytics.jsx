@@ -43,7 +43,7 @@ export default function Analytics({ toast }) {
     (async () => {
       setLoading(true)
       try {
-        const baseUrl = process.env.REACT_APP_API_URL || ''
+        const baseUrl = import.meta.env.VITE_API_URL || ''
         const r = await fetch(`${baseUrl}/api/analytics`)
         setData(await r.json())
       } catch { toast?.error('Failed to load analytics') }

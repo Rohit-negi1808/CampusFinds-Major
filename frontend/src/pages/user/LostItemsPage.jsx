@@ -40,7 +40,7 @@ export default function LostItemsPage({ showPage }) {
     (async () => {
       try {
         setLoading(true);
-        const baseUrl = process.env.REACT_APP_API_URL || '';
+        const baseUrl = import.meta.env.VITE_API_URL || '';
         const r = await fetch(`${baseUrl}/api/lost-items`);
         const data = await r.json();
         setItems(data.map(i => ({ ...i, type:'lost' })));

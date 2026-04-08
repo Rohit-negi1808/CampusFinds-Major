@@ -85,7 +85,7 @@ const ReportItemPage = ({ showPage, currentUser, toast }) => {
         else { newItem.dateFound = formData.date; }
 
         try {
-            const baseUrl = process.env.REACT_APP_API_URL || '';
+            const baseUrl = import.meta.env.VITE_API_URL || '';
             const endpoint = reportType === "lost"
                 ? `${baseUrl}/api/lost-items`
                 : `${baseUrl}/api/found-items`;

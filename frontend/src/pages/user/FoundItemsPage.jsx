@@ -59,7 +59,7 @@ export default function FoundItemsPage({ showPage, currentUser }) {
       try {
         setLoading(true);
         setError('');
-        const baseUrl = process.env.REACT_APP_API_URL || '';
+        const baseUrl = import.meta.env.VITE_API_URL || '';
         const r = await fetch(`${baseUrl}/api/found-items`);
         if (!r.ok) throw new Error('Server error ' + r.status);
         const data = await r.json();
@@ -99,7 +99,7 @@ export default function FoundItemsPage({ showPage, currentUser }) {
       return setClaimError('Please fill Name, Contact and Message.');
     setSubmitting(true);
     try {
-      const baseUrl = process.env.REACT_APP_API_URL || '';
+      const baseUrl = import.meta.env.VITE_API_URL || '';
       const r = await fetch(`${baseUrl}/api/claims`, { method:'POST', headers:{'Content-Type':'application/json'},
         body: JSON.stringify({ itemId:selectedItem._id, itemType:'found', claimantName:claimData.name, claimantEmail:claimData.email||'', contact:claimData.contact, message:claimData.message })
       });

@@ -38,7 +38,7 @@ export default function LostItemsManagement({ toast }) {
 
   const fetchItems = async () => {
     setLoading(true)
-    try { const baseUrl = process.env.REACT_APP_API_URL || ''; const r = await fetch(`${baseUrl}/api/lost-items`); setItems(await r.json()) }
+    try { const baseUrl = import.meta.env.VITE_API_URL || ''; const r = await fetch(`${baseUrl}/api/lost-items`); setItems(await r.json()) }
     catch { toast?.error('Failed to load lost items') }
     finally { setLoading(false) }
   }
@@ -59,7 +59,7 @@ export default function LostItemsManagement({ toast }) {
 
   const doDelete = async () => {
     try {
-      const baseUrl = process.env.REACT_APP_API_URL || ''
+      const baseUrl = import.meta.env.VITE_API_URL || ''
       await fetch(`${baseUrl}/api/lost-items/${deleteTarget._id}`, { method: 'DELETE' })
       setItems(p => p.filter(i => i._id !== deleteTarget._id))
       toast?.success('Item deleted'); setDeleteTarget(null)
@@ -68,7 +68,7 @@ export default function LostItemsManagement({ toast }) {
 
   const doEdit = async () => {
     try {
-      const baseUrl = process.env.REACT_APP_API_URL || ''
+      const baseUrl = import.meta.env.VITE_API_URL || ''
       const r = await fetch(`${baseUrl}/api/lost-items/${editItem._id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(editForm) })
       const updated = await r.json()
       setItems(p => p.map(i => i._id === editItem._id ? updated : i))

@@ -30,7 +30,7 @@ export default function FeedbackComplaints({ toast }) {
     (async () => {
       setLoading(true)
       try {
-        const baseUrl = process.env.REACT_APP_API_URL || ''
+        const baseUrl = import.meta.env.VITE_API_URL || ''
         const [cRes, fRes] = await Promise.all([fetch(`${baseUrl}/api/contact`), fetch(`${baseUrl}/api/feedback`)])
         if (cRes.ok) setComplaints(await cRes.json())
         if (fRes.ok) setFeedbacks(await fRes.json())
@@ -52,7 +52,7 @@ export default function FeedbackComplaints({ toast }) {
   const resolveComplaint = async (id, adminReply) => {
     setSaving(true)
     try {
-      const baseUrl = process.env.REACT_APP_API_URL || ''
+      const baseUrl = import.meta.env.VITE_API_URL || ''
       const r = await fetch(`${baseUrl}/api/contact/${id}/resolve`, { method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ adminReply }) })
       if (!r.ok) throw new Error()
       const updated = await r.json()
@@ -65,7 +65,7 @@ export default function FeedbackComplaints({ toast }) {
   const deleteFeedback = async (id) => {
     if (!confirm('Delete this feedback?')) return
     try {
-      const baseUrl = process.env.REACT_APP_API_URL || ''
+      const baseUrl = import.meta.env.VITE_API_URL || ''
       await fetch(`${baseUrl}/api/feedback/${id}`, { method:'DELETE' })
       setFeedbacks(p => p.filter(f => f._id !== id))
       toast?.success('Deleted')
@@ -74,7 +74,7 @@ export default function FeedbackComplaints({ toast }) {
 
   const toggleFeedback = async (id) => {
     try {
-      const baseUrl = process.env.REACT_APP_API_URL || ''
+      const baseUrl = import.meta.env.VITE_API_URL || ''
       const r = await fetch(`${baseUrl}/api/feedback/${id}/toggle`, { method:'PATCH' })
       if (!r.ok) throw new Error()
       const updated = await r.json()
