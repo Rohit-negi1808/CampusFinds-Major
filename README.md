@@ -77,8 +77,4 @@ npm run dev       # starts on http://localhost:3000
 
 ---
 
-## 🛡️ Default Admin
-- Email: `admin@campusfinds.com`
-- Password: `admin123`
-
 **Change in `backend/.env` before deployment.**
