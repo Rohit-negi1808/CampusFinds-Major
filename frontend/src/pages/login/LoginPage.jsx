@@ -11,13 +11,13 @@ const LoginPage = ({ handleLogin, email, setEmail, password, setPassword, loginT
     {/* Email Input */}
     <div className="mb-3">
       <label htmlFor="email" className="form-label small fw-semibold text-muted mb-1">
-        Email Address
+        CU Mail
       </label>
       <input
         type="email"
         id="email"
         className="form-control rounded-pill px-3 py-2"
-        placeholder="Enter your email"
+        placeholder="Enter your Cu Outlook ID "
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
