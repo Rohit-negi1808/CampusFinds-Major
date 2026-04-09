@@ -11,7 +11,7 @@ const LoginPage = ({ handleLogin, email, setEmail, password, setPassword, loginT
     {/* Email Input */}
     <div className="mb-3">
       <label htmlFor="email" className="form-label small fw-semibold text-muted mb-1">
-        CU Mail
+        CU-Mail
       </label>
       <input
         type="email"
